@@ -1,4 +1,3 @@
-
 import telebot
 import dotenv
 from os import getenv
@@ -6,7 +5,6 @@ from os import getenv
 dotenv.load_dotenv()
 
 TOKEN_TELEGRAM = getenv("TOKEN_TELEGRAM")
-
 
 bot = telebot.TeleBot(TOKEN_TELEGRAM)
 
@@ -21,30 +19,27 @@ opcao1_comandos = (
 
 @bot.message_handler(commands=["start"])
 def mensagem_boas_vindas(message):
-    bot.send_message(message.chat.id, "Olá, tudo bem? Escolha uma das seguintes opções: ") 
-    bot.send_message(message.chat.id, comandos[0])
-    bot.send_message(message.chat.id, comandos[1])
+    bot.send_message(message.chat.id, "Olá, tudo bem? Escolha uma das seguintes opções:") 
+    for comando in comandos:
+        bot.send_message(message.chat.id, comando)
     
 @bot.message_handler(commands=["opcao1"])
 def opcao1(message):
-    bot.send_message(message.chat.id, "A primeira opção foi escolhida.")
-    
+    bot.send_message(message.chat.id, "A primeira opção foi escolhida. Agora escolha uma das subopções:")
+    for subcomando in opcao1_comandos:
+        bot.send_message(message.chat.id, subcomando)
+
+@bot.message_handler(commands=["subopcao1"])
 def subopcao1(message):
     bot.send_message(message.chat.id, "Você escolheu a Subopção 1 da opção 1.")
 
-
-
-
-
-
-
+@bot.message_handler(commands=["subopcao2"])
+def subopcao2(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 2 da opção 1.")
     
 @bot.message_handler(commands=["opcao2"])
 def opcao2(message):
     bot.send_message(message.chat.id, "A segunda opção foi escolhida.")
-    
+
 if __name__ == "__main__":
     bot.polling()
-    
-    
-#http://t.me/Lixo_no_Lixo1911_bot

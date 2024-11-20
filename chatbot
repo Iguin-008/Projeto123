@@ -7,11 +7,16 @@ dotenv.load_dotenv()
 
 TOKEN_TELEGRAM = getenv("TOKEN_TELEGRAM")
 
+
 bot = telebot.TeleBot(TOKEN_TELEGRAM)
 
 comandos = (
     "/opcao1 - Essa é a primeira opção.",
     "/opcao2 - Essa é a segunda opção."
+)
+opcao1_comandos = (
+    "/subopcao1 - Subopção 1 da opção 1.",
+    "/subopcao2 - Subopção 2 da opção 1."
 )
 
 @bot.message_handler(commands=["start"])
@@ -23,6 +28,16 @@ def mensagem_boas_vindas(message):
 @bot.message_handler(commands=["opcao1"])
 def opcao1(message):
     bot.send_message(message.chat.id, "A primeira opção foi escolhida.")
+    
+def subopcao1(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 1 da opção 1.")
+
+
+
+
+
+
+
     
 @bot.message_handler(commands=["opcao2"])
 def opcao2(message):

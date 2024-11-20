@@ -1,3 +1,5 @@
+
+import mensagem
 import telebot
 import dotenv
 from os import getenv
@@ -6,27 +8,90 @@ dotenv.load_dotenv()
 
 TOKEN_TELEGRAM = getenv("TOKEN_TELEGRAM")
 
+
 bot = telebot.TeleBot(TOKEN_TELEGRAM)
 
 comandos = (
-    "/opcao1 - Essa é a primeira opção.",
-    "/opcao2 - Essa é a segunda opção."
+    "/opcao1 - Dispositivos Pessoais",
+    "/opcao2 - Eletrodomésticos",
+    "/opcao3 - Equipamentos de Escritório",
+    "/opcao4 - Acessórios e Baterias"
+
 )
+
 opcao1_comandos = (
-    "/subopcao1 - Subopção 1 da opção 1.",
-    "/subopcao2 - Subopção 2 da opção 1."
+    "/subopcao1 - Celulares",
+    "/subopcao2 - Tablets",
+    "/subopcao3 - Computadores"
 )
+opcao2_comandos = (
+    "/subopcao1 - Geladeira",
+    "/subopcao2 - Micro-Ondas",
+    "/subopcao3 - Televisores",
+    "/subopcao4 - Aspirador de Pó"
+)
+opcao3_comandos = (
+    "/subopcao1 - Impressora",
+    "/subopcao2 - Mouse",
+    "/subopcao3 - Teclados",
+    "/subopcao4 - Monitores"
+)
+opcao4_comandos = (
+    "/subopcao1 - Cabos",
+    "/subopcao2 - Carregadores",
+    "/subopcao3 - Pilhas e Baterias"
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @bot.message_handler(commands=["start"])
 def mensagem_boas_vindas(message):
-    bot.send_message(message.chat.id, "Olá, tudo bem? Escolha uma das seguintes opções:") 
-    for comando in comandos:
-        bot.send_message(message.chat.id, comando)
+    bot.send_message(message.chat.id, mensagem.BOAS_VINDAS) 
+    bot.send_message(message.chat.id, comandos[0])
+    bot.send_message(message.chat.id, comandos[1])
+    bot.send_message(message.chat.id, comandos[2])
+    bot.send_message(message.chat.id, comandos[3])
+
     
 @bot.message_handler(commands=["opcao1"])
 def opcao1(message):
-    bot.send_message(message.chat.id, "A primeira opção foi escolhida. Agora escolha uma das subopções:")
+    bot.send_message(message.chat.id, "Você clicou em Dispositivos Pessoais. Agora escolha uma das subopções:")
     for subcomando in opcao1_comandos:
+        bot.send_message(message.chat.id, subcomando)
+    
+@bot.message_handler(commands=["subopcao1"])
+def subopcao1(message):
+    bot.send_message(message.chat.id, mensagem.DIS_CELULAR)
+
+@bot.message_handler(commands=["subopcao2"])
+def subopcao2(message):
+    bot.send_message(message.chat.id, mensagem.DIS_TABLET)
+    
+@bot.message_handler(commands=["subopcao3"])
+def subopcao3(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 3 da opção 1.")
+    
+
+
+
+    
+@bot.message_handler(commands=["opcao2"])
+def opcao2(message):
+    bot.send_message(message.chat.id, "Você clicou em Eletrodomésticos. Agora escolha uma das subopções:")
+    for subcomando in opcao2_comandos:
         bot.send_message(message.chat.id, subcomando)
 
 @bot.message_handler(commands=["subopcao1"])
@@ -37,9 +102,63 @@ def subopcao1(message):
 def subopcao2(message):
     bot.send_message(message.chat.id, "Você escolheu a Subopção 2 da opção 1.")
     
-@bot.message_handler(commands=["opcao2"])
-def opcao2(message):
-    bot.send_message(message.chat.id, "A segunda opção foi escolhida.")
+@bot.message_handler(commands=["subopcao3"])
+def subopcao3(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 3 da opção 1.")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
+@bot.message_handler(commands=["opcao3"])
+def opcao3(message):
+    bot.send_message(message.chat.id, "Você clicou em Equipamentos de Escritório. Agora escolha uma das subopções:")
+    for subcomando in opcao3_comandos:
+        bot.send_message(message.chat.id, subcomando)
+        
+@bot.message_handler(commands=["subopcao1"])
+def subopcao1(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 1 da opção 1.")
+
+@bot.message_handler(commands=["subopcao2"])
+def subopcao2(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 2 da opção 1.")
+    
+@bot.message_handler(commands=["subopcao3"])
+def subopcao3(message):
+    bot.send_message(message.chat.id, "Você escolheu a Subopção 3 da opção 1.")
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+@bot.message_handler(commands=["opcao4"])
+def opcao4(message):
+    bot.send_message(message.chat.id, "Você clicou em Acessórios e Baterias. Agora escolha uma das subopções:")
+    for subcomando in opcao4_comandos:
+        bot.send_message(message.chat.id, subcomando)
+    
 if __name__ == "__main__":
     bot.polling()
+    
+    
+#http://t.me/Lixo_no_Lixo1911_bot
